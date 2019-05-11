@@ -10,29 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_10_001213) do
+ActiveRecord::Schema.define(version: 2019_05_09_234711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "games", force: :cascade do |t|
-    t.bigint "match_id"
-    t.bigint "player_1_id"
-    t.bigint "player_2_id"
-    t.integer "player_1_score", default: 0
-    t.integer "player_2_score", default: 0
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["match_id"], name: "index_games_on_match_id"
-    t.index ["player_1_id"], name: "index_games_on_player_1_id"
-    t.index ["player_2_id"], name: "index_games_on_player_2_id"
-  end
-
-  create_table "matches", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "players", force: :cascade do |t|
     t.string "first_name"
@@ -43,11 +24,9 @@ ActiveRecord::Schema.define(version: 2019_05_10_001213) do
 
   create_table "teams", force: :cascade do |t|
     t.string "name"
+    t.string "type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "games", "matches"
-  add_foreign_key "games", "players", column: "player_1_id"
-  add_foreign_key "games", "players", column: "player_2_id"
 end
