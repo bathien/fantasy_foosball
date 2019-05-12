@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,44 +12,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_10_001213) do
-
+ActiveRecord::Schema.define(version: 20_190_511_122_623) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "games", force: :cascade do |t|
-    t.bigint "match_id"
-    t.bigint "player_1_id"
-    t.bigint "player_2_id"
-    t.integer "player_1_score", default: 0
-    t.integer "player_2_score", default: 0
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["match_id"], name: "index_games_on_match_id"
-    t.index ["player_1_id"], name: "index_games_on_player_1_id"
-    t.index ["player_2_id"], name: "index_games_on_player_2_id"
+  create_table 'games', force: :cascade do |t|
+    t.bigint 'match_id'
+    t.bigint 'winner_team_id'
+    t.integer 'team_1_score'
+    t.integer 'team_2_score'
+    t.integer 'status'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['match_id'], name: 'index_games_on_match_id'
+    t.index ['winner_team_id'], name: 'index_games_on_winner_team_id'
   end
 
-  create_table "matches", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'matches', force: :cascade do |t|
+    t.bigint 'team_1_id'
+    t.bigint 'team_2_id'
+    t.bigint 'winner_team_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['team_1_id'], name: 'index_matches_on_team_1_id'
+    t.index ['team_2_id'], name: 'index_matches_on_team_2_id'
+    t.index ['winner_team_id'], name: 'index_matches_on_winner_team_id'
   end
 
-  create_table "players", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'player_teams', force: :cascade do |t|
+    t.bigint 'player_id'
+    t.bigint 'team_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['player_id'], name: 'index_player_teams_on_player_id'
+    t.index ['team_id'], name: 'index_player_teams_on_team_id'
   end
 
-  create_table "teams", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'players', force: :cascade do |t|
+    t.string 'first_name'
+    t.string 'last_name'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  add_foreign_key "games", "matches"
-  add_foreign_key "games", "players", column: "player_1_id"
-  add_foreign_key "games", "players", column: "player_2_id"
+  create_table 'teams', force: :cascade do |t|
+    t.string 'name'
+    t.string 'type', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+  end
+
+  add_foreign_key 'games', 'matches'
+  add_foreign_key 'games', 'teams', column: 'winner_team_id'
+  add_foreign_key 'matches', 'teams', column: 'team_1_id'
+  add_foreign_key 'matches', 'teams', column: 'team_2_id'
+  add_foreign_key 'matches', 'teams', column: 'winner_team_id'
+  add_foreign_key 'player_teams', 'players'
+  add_foreign_key 'player_teams', 'teams'
 end
