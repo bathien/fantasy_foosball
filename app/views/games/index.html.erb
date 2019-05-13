@@ -29,7 +29,7 @@
 
               </td>
             </tr>
-          <% end %>
+          <% end if @games.any? %>
           </tbody>
         </table>
         <%= link_to "Add new", new_game_path, class: "btn btn-outline btn-success float-right" %>

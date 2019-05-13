@@ -29,7 +29,7 @@
 
               </td>
             </tr>
-          <% end %>
+          <% end if @matches.any? %>
           </tbody>
         </table>
         <%= link_to "Add new", new_match_path, class: "btn btn-outline btn-success float-right" %>

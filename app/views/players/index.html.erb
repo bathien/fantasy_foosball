@@ -13,7 +13,7 @@
           </tr>
           </thead>
           <tbody>
-          <% @playeres.each do |player| %>
+          <% @players.each do |player| %>
             <tr>
               <td><%= player.id %></td>
               <td><%= player.first_name %></td>
@@ -26,7 +26,7 @@
 
               </td>
             </tr>
-          <% end %>
+          <% end if @players.any? %>
           </tbody>
         </table>
         <%= link_to "Add new", new_player_path, class: "btn btn-outline btn-success float-right" %>

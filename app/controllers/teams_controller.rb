@@ -22,7 +22,7 @@ class TeamsController < ApplicationController
     if @team.save
       redirect_to @team, notice: 'Team was successfully created.'
     else
-      2.times { @team.players.build }
+      (2 - @team.players.size).times { @team.players.build }
       render :new
     end
   end

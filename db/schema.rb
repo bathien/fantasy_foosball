@@ -61,10 +61,10 @@ ActiveRecord::Schema.define(version: 2019_05_11_122623) do
   end
 
   add_foreign_key "games", "matches"
-  add_foreign_key "games", "teams", column: "winner_team_id"
-  add_foreign_key "matches", "teams", column: "team_1_id"
-  add_foreign_key "matches", "teams", column: "team_2_id"
-  add_foreign_key "matches", "teams", column: "winner_team_id"
+  add_foreign_key "games", "teams", column: "winner_team_id", on_delete: :cascade
+  add_foreign_key "matches", "teams", column: "team_1_id", on_delete: :cascade
+  add_foreign_key "matches", "teams", column: "team_2_id", on_delete: :cascade
+  add_foreign_key "matches", "teams", column: "winner_team_id", on_delete: :cascade
   add_foreign_key "player_teams", "players"
   add_foreign_key "player_teams", "teams"
 end

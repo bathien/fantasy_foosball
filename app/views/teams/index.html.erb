@@ -23,10 +23,10 @@
                 <td><%= link_to 'Edit', edit_team_path(team) %></td>
                 <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </tr>
-            <% end %>
+            <% end if @teams&.any? %>
           </tbody>
         </table>
-        <%= link_to "Add new team", new_player_path, class: "btn btn-outline btn-success float-right" %>
+        <%= link_to "Add new team", new_team_path, class: "btn btn-outline btn-success float-right" %>
       </div>
     </div>
   </div>
