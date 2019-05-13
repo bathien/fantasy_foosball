@@ -1,0 +1,41 @@
+<h1> Player List </h1>
+<div class="col-lg-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @playeres.each do |player| %>
+            <tr>
+              <td><%= player.id %></td>
+              <td><%= player.first_name %></td>
+              <td><%= player.last_name %></td>
+              <td>
+                <%= link_to edit_player_path(player), class: "btn btn-outline btn-info" do %>
+                  <i class="fa fa-edit"></i> Edit
+                <% end %>
+                <%= link_to 'Destroy', player, method: :delete, class: "btn btn-danger btn-outline", data: { confirm: 'Are you sure?' } %>
+
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <%= link_to "Add new", new_player_path, class: "btn btn-outline btn-success float-right" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<% content_for :page_name do %>
+  <%= "Players" %>
+<% end %>

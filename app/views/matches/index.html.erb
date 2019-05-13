@@ -1,25 +1,44 @@
-<p id="notice"><%= notice %></p>
+<h1> Match List </h1>
 
-<h1>Matches</h1>
+<div class="col-lg-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Team 1</th>
+            <th>Team 2</th>
+            <th>Winner Team</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @matches.each do |match| %>
+            <tr>
+              <td><%= match.id %></td>
+              <td><%= match.team_1.name %></td>
+              <td><%= match.team_2.name %></td>
+              <td><%= match.winner_team&.name %></td>
+              <td>
+                <%= link_to edit_match_path(match), class: "btn btn-outline btn-info" do %>
+                  <i class="fa fa-edit"></i> Edit
+                <% end %>
+                <%= link_to 'Destroy', match, method: :delete, class: "btn btn-danger btn-outline", data: { confirm: 'Are you sure?' } %>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @matches.each do |match| %>
-      <tr>
-        <td><%= link_to 'Show', match %></td>
-        <td><%= link_to 'Edit', edit_match_path(match) %></td>
-        <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <%= link_to "Add new", new_match_path, class: "btn btn-outline btn-success float-right" %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <br>
-
-<%= link_to 'New Match', new_match_path %>
+<% content_for :page_name do %>
+  <%= "Matches" %>
+<% end %>

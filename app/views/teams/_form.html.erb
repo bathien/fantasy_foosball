@@ -10,11 +10,21 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
+  <%= form.fields_for :players do |builder| %>
+    <h4>Player <%= builder.index + 1 %></h4>
+    <div class="form-group">
+      <%= builder.label :first_name, "First name" %>
+      <%= builder.text_field :first_name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= builder.label :last_name, "Last name" %>
+      <%= builder.text_field :last_name, class: "form-control" %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

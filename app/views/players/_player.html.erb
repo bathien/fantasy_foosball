@@ -1,0 +1,6 @@
+<div class="item d-flex align-items-center">
+  <div class="text"><%= link_to 'Edit', edit_player_path(player) %>
+    <h3 class="h5"><%= player.full_name %></h3></a>
+    <small>Created at: <%= time_ago_in_words(player.created_at) %> ago</small>
+  </div>
+</div>

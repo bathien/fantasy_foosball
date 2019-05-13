@@ -1,0 +1,33 @@
+<%= form_with(model: game, local: true) do |form| %>
+  <% if game.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
+
+      <ul>
+      <% game.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= form.label :match, "Match:" %>
+    <%= form.select 'match_id', options_for_select(Match.all.collect{ |u| [u.id, u.id] }), class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= form.label :status, "Match:" %>
+    <%= form.select 'status', options_for_select(Game.statuses.collect{ |u| [u.first, u.first] }), class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= form.label :team_1_score, "Team 1 score: " %>
+    <%= form.number_field :team_1_score, class: "form-control form-control-lg", placeholder: "Enter your first name" %>
+  </div>
+  <div class="form-group">
+    <%= form.label :team_2_score, "Team 2 score: " %>
+    <%= form.number_field :team_2_score, class: "form-control form-control-lg", placeholder: "Enter your last name" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

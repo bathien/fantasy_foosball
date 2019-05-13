@@ -3,6 +3,7 @@
 class Game < ApplicationRecord
   enum status: %w[pending completed cancelled]
   belongs_to :match
+  belongs_to :winner_team, class_name: "Team", foreign_key: "winner_team_id"
 
   delegate :team_1_id, :team_2_id, to: :match
   before_validation :set_default_status
@@ -21,18 +22,20 @@ class Game < ApplicationRecord
 
   validate :game_data_cant_change_if_completed, on: :update, if: :completed?
   validate :score_cant_not_be_draw, if: :completed?
+  validate :match_completed
 
   private
 
   def update_match_winner
-    match_winner_team_id =
+    match_winner_team =
       Game.where(match_id: match_id)
           .group(:winner_team_id)
           .having('count(winner_team_id) >= 2')
           .select(:winner_team_id)
-    return unless match_winner_team_id
+    # binding.pry
+    return if match_winner_team.nil? || match_winner_team[0]&.winner_team_id.nil?
 
-    Match.find(match_id).update!(winner_team_id: match_winner_team_id)
+    Match.find(match_id).update!(winner_team_id: match_winner_team[0].winner_team_id)
   end
 
   def game_data_cant_change_if_completed
@@ -50,5 +53,9 @@ class Game < ApplicationRecord
 
   def score_cant_not_be_draw
     errors.add(:base, 'game score can not be draw') if team_1_score == team_2_score
+  end
+
+  def match_completed
+    errors.add(:base, 'Match complete already no need any games') if match.winner_team
   end
 end
