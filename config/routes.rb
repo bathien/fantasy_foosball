@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  root 'dashboards#home'
   resources :matches
   resources :teams
   resources :games

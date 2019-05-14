@@ -1,0 +1,29 @@
+<div class="navbar-default sidebar" role="navigation">
+  <div class="sidebar-nav navbar-collapse slimscrollsidebar">
+    <ul class="nav" id="side-menu">
+      <li class="sidebar-search hidden-sm hidden-md hidden-lg">
+      </li>
+      <li class="nav-small-cap m-t-10">--- Main Menu</li>
+      <li>
+        <%= link_to matches_url, class: "nav-link" do %>
+          <span class="hide-menu"> Match</span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to teams_url, class: "nav-link" do %>
+          <span class="hide-menu"> Team </span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to games_url, class: "nav-link" do %>
+          <span class="hide-menu"> Game</span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to players_url, class: "nav-link" do %>
+          <span class="hide-menu"> Player </span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>

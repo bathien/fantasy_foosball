@@ -8,10 +8,45 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  <body class="fix-header fix-sidebar">
+    <%= render 'shared/messages' %>
 
-  <body>
-    <div class="container">
-      <%= yield %>
+    <!-- Preloader -->
+    <div class="preloader">
+      <div class="cssload-speeding-wheel"></div>
+    </div>
+    <div id="wrapper">
+      <%= render 'shared/left_sidebar' %>
+      <div id="page-wrapper">
+        <div class="container-fluid">
+          <div class="row bg-title">
+            <!-- .page title -->
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+              <h4 class="page-title"><%= yield :page_name %></h4>
+            </div>
+            <!-- /.page title -->
+            <!-- .breadcrumb -->
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+              <ol class="breadcrumb">
+                <li><a href="#">Dashboard -></a></li>
+                <li class="active"><%= yield :page_name %></li>
+              </ol>
+            </div>
+            <!-- /.breadcrumb -->
+          </div>
+          <!-- .row -->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="white-box">
+                <%= yield %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.container-fluid -->
+        <footer class="footer text-center"> 2019 &copy; Thien Ho</footer>
+      </div>
+      <!-- /#page-wrapper -->
     </div>
   </body>
 </html>

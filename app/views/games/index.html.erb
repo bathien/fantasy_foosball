@@ -7,6 +7,7 @@
           <tr>
             <th>ID</th>
             <th>Match id</th>
+            <th>Status</th>
             <th>Team 1 score</th>
             <th>Team 2 score</th>
             <th>Winner Team</th>
@@ -18,12 +19,13 @@
             <tr>
               <td><%= game.id %></td>
               <td><%= game.match_id %></td>
+              <td><%= game.status %></td>
               <td><%= game.team_1_score %></td>
               <td><%= game.team_2_score %></td>
               <td><%= game.winner_team&.name %></td>
               <td>
                 <%= link_to edit_game_path(game), class: "btn btn-outline btn-info" do %>
-                  <i class="fa fa-edit"></i> Edit
+                  Edit
                 <% end %>
                 <%= link_to 'Destroy', game, method: :delete, class: "btn btn-danger btn-outline", data: { confirm: 'Are you sure?' } %>
 
@@ -40,5 +42,5 @@
 
 <br>
 <% content_for :page_name do %>
-  <%= "games" %>
+  <%= "Games" %>
 <% end %>

@@ -3,7 +3,7 @@
 class Game < ApplicationRecord
   enum status: %w[pending completed cancelled]
   belongs_to :match
-  belongs_to :winner_team, class_name: "Team", foreign_key: "winner_team_id"
+  belongs_to :winner_team, class_name: "Team", foreign_key: "winner_team_id", optional: true
 
   delegate :team_1_id, :team_2_id, to: :match
   before_validation :set_default_status

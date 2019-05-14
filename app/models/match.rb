@@ -18,4 +18,8 @@ class Match < ApplicationRecord
   validates :team_1, :team_2, presence: true
   validates :games, length: { maximum: 3 }
 
+  delegate :name, to: :winner_team, prefix: true
+  scope :by_team, lambda{ |team_id| where(team_1_id: team_id).or(where(team_2_id: team_id)) if team_id }
+  scope :completed, -> { where.not(winner_team_id: nil) }
+  scope :not_completed, -> { where.not(id: completed) }
 end

@@ -1,0 +1,17 @@
+<% if content_for?(:breadcrumbs) %>
+  <div class="breadcrumb-wrapper">
+    <nav class="breadcrumb">
+      <%= link_to 'Dashboard', root_path, class: 'breadcrumb-item' %>
+      <% breadcrumbs = JSON.parse(sanitize yield(:breadcrumbs)) if content_for?(:breadcrumbs) %>
+      <% breadcrumbs.each do |breadcrumb| %>
+        <% case breadcrumb.class.to_s %>
+      <% when 'Array' %>
+          <% string, link = breadcrumb %>
+          <%= link_to string, link, class: "breadcrumb-item #{breadcrumb.equal?(breadcrumbs.last) ? 'active' : nil}" %>
+        <% when 'String' %>
+          <%= content_tag :span, breadcrumb, class: "breadcrumb-item #{breadcrumb.equal?(breadcrumbs.last) ? 'active' : nil}" %>
+        <% end %>
+      <% end if content_for?(:breadcrumbs) %>
+    </nav>
+  </div>
+<% end %>
