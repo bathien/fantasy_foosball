@@ -12,11 +12,11 @@
   <% end %>
   <div class="form-group">
     <%= form.label :match, "Match:" %>
-    <%= form.select 'match_id', options_for_select(Match.not_completed.collect{ |u| [u.id, u.id] }), class: "form-control" %>
+    <%= form.select 'match_id', options_for_select(Match.not_completed.collect{ |u| [u.id, u.id] }, game.match_id), {}, { class: 'form-control' }  %>
   </div>
   <div class="form-group">
     <%= form.label :status, "Match:" %>
-    <%= form.select 'status', options_for_select(Game.statuses.collect{ |u| [u.first, u.first] }), class: "form-control" %>
+    <%= form.select 'status', options_for_select(Game.statuses.collect{ |u| [u.first, u.first] }, game.status), {}, { class: 'form-control' }  %>
   </div>
   <div class="form-group">
     <%= form.label :team_1_score, "Team 1 score: " %>

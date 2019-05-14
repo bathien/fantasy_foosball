@@ -56,6 +56,6 @@ class Game < ApplicationRecord
   end
 
   def match_completed
-    errors.add(:base, 'Match complete already no need any games') if match.winner_team
+    errors.add(:base, 'Match complete already no need any games') if match&.winner_team
   end
 end

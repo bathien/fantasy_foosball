@@ -19,8 +19,14 @@
                 <td><%= team.name %></td>
                 <td><%= team&.players[0]&.full_name %></td>
                 <td><%= team&.players[1]&.full_name %></td>
-                <td><%= link_to 'Edit', edit_team_path(team) %></td>
-                <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td>
+                  <%= link_to edit_team_path(team), class: "btn btn-outline btn-info" do %>
+                    <i class="fa fa-edit"></i> Edit
+                  <% end %>
+                  <%= link_to team, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-outline" do %>
+                    <i class="fa fa-trash-o"></i> Destroy
+                  <% end %>
+                </td>
               </tr>
             <% end if @teams&.any? %>
           </tbody>

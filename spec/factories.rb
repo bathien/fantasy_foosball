@@ -6,30 +6,14 @@ FactoryBot.define do
     last_name { FFaker::Name.last_name }
   end
 
-  factory :singles_team do
+  factory :team do
     name { FFaker::Internet.user_name }
-  end
-
-  factory :doubles_team do
-    name { FFaker::Internet.user_name }
-  end
-
-  factory :singles_player_team, class: 'PlayerTeam' do
-    association :singles_team
-    name { FFaker::Internet.user_name }
-    association :player
-  end
-
-  factory :doubles_player_team, class: 'PlayerTeam' do
-    association :doubles_team
-    name { FFaker::Internet.user_name }
-    association :player
-    association :player
+    players {FactoryBot.create_list(:player, 2)}
   end
 
   factory :match do
-    association :team_1, factory: :singles_team
-    association :team_2, factory: :singles_team
+    association :team_1, factory: :team
+    association :team_2, factory: :team
   end
 
   factory :game do

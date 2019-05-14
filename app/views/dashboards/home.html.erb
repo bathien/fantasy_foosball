@@ -1,12 +1,19 @@
 <div id="leaderboards">
   <ul class="toplist">
-    <% @result.each_with_index do |(key, value), index| %>
-      <li data-rank="<%= index + 1 %>">
-        <div class="thumb">
-          <span class="name"><%= key %></span>
-          <span class="stat"><b><%= number_to_percentage(value, precision: 2) %></span>
-        </div>
-      </li>
+    <% if @result.present? %>
+      <% @result.each_with_index do |(key, value), index| %>
+        <li data-rank="<%= index + 1 %>">
+          <div class="thumb">
+            <span class="name"><%= key %></span>
+            <span class="stat"><b><%= number_to_percentage(value, precision: 2) %></span>
+          </div>
+        </li>
+      <% end %>
+    <% else %>
+      No winner team
     <% end %>
   </ul>
 </div>
+<% content_for :page_name do %>
+  <%= "Team Ranking" %>
+<% end %>
